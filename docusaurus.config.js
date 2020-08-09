@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Documedia',
-  tagline: 'Tutoriales y documentación de administración de servidores, desarrollo web, diseño gráfico y análisis de datos de dimedia',
+  tagline: 'Tutoriales y documentación de trabajo para dimedia',
   url: 'https://docu.dimedia.xyz',
   baseUrl: '/',
   onBrokenLinks: 'throw',
