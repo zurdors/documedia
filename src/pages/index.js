@@ -8,32 +8,29 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Easy to Use</>,
+    title: <>Diseño</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+      Identificamos el mejor camino para destapar todo el potencial de tu negocio y lograr así resultados óptimos.
       </>
     ),
   },
   {
-    title: <>Focus on What Matters</>,
+    title: <>Desarrollo</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+      Programamos siempre con tus usuarios en mente, cuidando de que tengan la mejor experiencia digital posible.
       </>
     ),
   },
   {
-    title: <>Powered by React</>,
+    title: <>Estrategia</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+      Analizamos el mercado y tus usuarios para trazar el mejor plan hacia el éxito de tu proyecto.
       </>
     ),
   },
@@ -72,7 +69,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/')}>
-              Get Started
+              Empezar
             </Link>
           </div>
         </div>
