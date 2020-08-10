@@ -8,29 +8,29 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Diseño</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: <>Artículos</>,
+    imageUrl: 'img/articulos-dm.svg',
     description: (
       <>
-      Identificamos el mejor camino para destapar todo el potencial de tu negocio y lograr así resultados óptimos.
+      Encontrarás nuestros mejores consejos para configurar un servidor, administrar un sitio web con Wordpress o configurar una tienda en línea.
       </>
     ),
   },
   {
-    title: <>Desarrollo</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: <>Descargas digitales</>,
+    imageUrl: 'img/descargas-dm.svg',
     description: (
       <>
-      Programamos siempre con tus usuarios en mente, cuidando de que tengan la mejor experiencia digital posible.
+      Pondremos a tu disposición archivo digitales, incluidos libros electrónicos, audiolibros, videos, PDF, etc., para complementar los temas.
       </>
     ),
   },
   {
-    title: <>Estrategia</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: <>Soporte</>,
+    imageUrl: 'img/soporte-dm.svg',
     description: (
       <>
-      Analizamos el mercado y tus usuarios para trazar el mejor plan hacia el éxito de tu proyecto.
+      Y si aún te quedan dudas, puedes comunicarte con el equipo de dimedia a través de <a href="https://api.whatsapp.com/send?phone=12133206581">WhatsApp</a> o vía telefónica.
       </>
     ),
   },
