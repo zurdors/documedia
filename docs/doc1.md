@@ -1,202 +1,79 @@
 ---
 id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: Cómo renovar automáticamente certificados SSL en un servidor Ubuntu 16.04 con Apache y Bitnami WordPress Stack.
+sidebar_label: Renovación SSL
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+Let’s Encrypt es una entidad de certificación (CA) que proporciona una manera sencilla de obtener e instalar certificados de TLS/SSL gratuitos, lo que permite usar HTTPS cifrado en servidores web. Simplifica el proceso al proporcionar un cliente de software, [Lego](https://github.com/go-acme/lego), que intenta automatizar la mayoría (cuando no todos) de los pasos requeridos. Cabe mencionar que los certificados Let's Encrypt solo son válidos durante tres meses por los que es necesario renovar el certificado antes de que caduque.
 
-## Markdown Syntax
-
-To serve as an example page when styling markdown based Docusaurus sites.
-
-## Headers
-
-# H1 - Create the best documentation
-
-## H2 - Create the best documentation
-
-### H3 - Create the best documentation
-
-#### H4 - Create the best documentation
-
-##### H5 - Create the best documentation
-
-###### H6 - Create the best documentation
-
----
-
-## Emphasis
-
-Emphasis, aka italics, with *asterisks* or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
----
-
-## Lists
-
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
-
-* Unordered list can use asterisks
-
-- Or minuses
-
-+ Or pluses
-
----
-
-## Links
-
-[I'm an inline-style link](https://www.google.com/)
-
-[I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com/ or <http://www.example.com/> and sometimes example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org/
-[1]: http://slashdot.org/
-[link text itself]: http://www.reddit.com/
-
----
-
-## Images
-
-Here's our logo (hover to see the title text):
-
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
-
-Images from any folder can be used by providing path to file. Path should be relative to markdown file.
-
-![img](../static/img/logo.svg)
-
----
-
-## Code
-
-```javascript
-var s = 'JavaScript syntax highlighting';
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print(s)
-```
-
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
-
-```js {2}
-function highlightMe() {
-  console.log('This line can be highlighted!');
-}
-```
-
----
-
-## Tables
-
-Colons can be used to align columns.
-
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
-
-There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
-
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
-
----
-
-## Blockquotes
-
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
----
-
-## Inline HTML
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
----
-
-## Line Breaks
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but... This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
-
----
-
-## Admonitions
-
-:::note
-
-This is a note
-
-:::
-
-:::tip
-
-This is a tip
-
-:::
+En este tutorial, se utilizará Lego y Cron para renovar automáticamente un certificado de SSL gratuito.
 
 :::important
 
-This is important
+En este tutorial asumimos que usted ya generó y configuró por primera vez, utilizando Lego, un certificado SSL en el servidor Ubuntu 16.04 con Apache y Bitnami WordPress Stack. Si no es así, siga el siguiente tutorial de [Cómo generar un certificado SSL](#).
 
 :::
 
-:::caution
+## Requisitos previos
+Para este tutorial, necesitará lo siguiente:
+* Un servidor/instancia Ubuntu 16.04 LTS con Apache y Bitnami WordPress Stack
+* Un editor de texto basado en consola o terminal. Para este tutorial se utilizará VIM.
+* Debe disponer de Cron instalado en el servidor
+* Un nombre de dominio registrado y apuntando hacia el IP del servidor desde donde generaremos el certificado. En este tutorial, se utilizará el subdominio tienda.dimedia.xyz como ejemplo. Puede adquirir un nombre de dominio en [GoDaddy](https://mx.godaddy.com) u obtener uno gratuito en [Freenom](https://www.freenom.com/es/index.html?lang=es) o utilizar un registrador de dominios de su preferencia.
 
-This is a caution
+## Crear un script de shell
+Para renovar automáticamente los certificados antes de que caduquen, es necesario escribir un [script de shell](https://es.wikipedia.org/wiki/Script_de_shell) que corra los comandos de renovación del certificado y posteriormente programar una tarea en Cron que ejecute periódica y automaticamente el script.
 
+* Con VIM crea un script en `/opt/bitnami/letsencrypt/scripts/`. Asígnale el nombre de tu preferencia al script. En este tutorial nosotros nombramos nuestro archivo como `renovar-certificado.sh`.
+
+```bash
+sudo vim /opt/bitnami/letsencrypt/scripts/renovar-certificado.sh
+```
+
+* Copia, pega y guarda el contenido que se encuentra en el bloque de código de abajo en el script que acabas de crear. Recuerda sustituir el nombre del subdomino _tienda.dimedia.xyz_ por el nombre de tu domino o subdomino, también remplaza el correo electrónico _ gaspar@dimedia.xyz_ con tu dirección de correo electrónico.
+
+```bash
+#!/bin/bash
+
+## Detiene todos los servicios
+sudo /opt/bitnami/ctlscript.sh stop
+
+## Solicita un nuevo certficado para tienda.dimedia.xyz
+sudo /opt/bitnami/letsencrypt/lego --tls --email="gaspar@dimedia.xyz" --domains="tienda.dimedia.xyz" --path="/opt/bitnami/letsencrypt" renew --days 90
+
+## Copia los certificados a la ruta/dirección donde se almacenarán los nuevos certificados para el modulo wordpress del sitio web tienda.dimedia.xyz
+sudo cp /opt/bitnami/letsencrypt/certificates/tienda.dimedia.xyz.crt /opt/bitnami/apps/shopdmwp/conf/certs/server.crt
+sudo cp /opt/bitnami/letsencrypt/certificates/tienda.dimedia.xyz.key /opt/bitnami/apps/shopdmwp/conf/certs/server.key
+
+## Inicia todos los servicios
+sudo /opt/bitnami/ctlscript.sh start
+
+```
+
+:::note
+No es necesario copiar los comentarios `##` del script.
 :::
 
-:::warning
+## Autorizar ejecución de script de shell
+El script de shell que acabamos de crear será ejecutado por Cron, pero por defecto el archivo no tiene dichos permisos por lo cual tendremos que asignárselo de la siguiente manera:
 
-This is a warning
+```bash
+sudo chmod +x /opt/bitnami/letsencrypt/scripts/renovar-certificado.sh
+```
 
-:::
+**Recuerda** cambiar el nombre del script `renovar-certificado.sh` por el nombre que le asignaste en los pasos anteriores.
+
+## Programar script de shell en Cron
+Ahora es momento de programar la tarea de Cron para ejecutar periódica y automáticamente la renovación del certificados SSL. En el caso de este tutorial, la tarea será programada para que a la _una de madrugada del primer día de cada mes_ se renueve el certificado SSL.
+
+- Ejecuta el siguiente comando para abrir el archivo crontab con el editor VIM:
+```bash
+sudo VISUAL=vim crontab -e
+```
+
+- Agregamos las siguientes líneas al archivos crontab:
+```bash
+0 7 1 * * /opt/bitnami/letsencrypt/scripts/renovar-certificado.sh 2> /dev/null
+```
+
+Esta tarea se ejecuta en segundo plano redireccionando el error estándar de la secuencia de comandos a una ubicación vacía, como `/dev/null`.
