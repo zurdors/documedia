@@ -9,9 +9,8 @@ module.exports = {
   projectName: 'documedia', // Usually your repo name.
   themeConfig: {
     algolia: {
-      apiKey: '3f2c7f1deffb39e949bebd42f8de45f0',
-      indexName: 'prod_DOCUMEDIA',
-      appId: '3KUMOA2EF7',
+      apiKey: '3481bc4c7b411f6b34d307b7e56b8a73',
+      indexName: 'dimedia_xyz',
       algoliaOptions: {},
     },
     navbar: {
