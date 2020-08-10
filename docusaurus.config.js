@@ -46,7 +46,11 @@ module.exports = {
             },
             {
               label: 'BITNAMI',
-              to: 'docs/doc2/',
+              to: 'docs/btn1/',
+            },
+            {
+              label: 'Wordpress',
+              to: 'docs/wps1/',
             },
           ],
         },
