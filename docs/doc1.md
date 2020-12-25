@@ -1,8 +1,10 @@
 ---
 id: doc1
-title: Cómo renovar automáticamente certificados SSL en un servidor Ubuntu 16.04 con Apache y Bitnami WordPress Stack.
-sidebar_label: Renovación SSL
+title: Programar script para renovar certificado Let's Encrypt
+sidebar_label: Script SSL
 ---
+Tutorial para aprender a renovar automáticamente certificados SSL en un servidor Ubuntu 16.04 con Apache y Bitnami WordPress Stack programando un script.sh y cron.
+
 
 Let’s Encrypt es una entidad de certificación (CA) que proporciona una manera sencilla de obtener e instalar certificados de TLS/SSL gratuitos, lo que permite usar HTTPS cifrado en servidores web. Simplifica el proceso al proporcionar un cliente de software, [Lego](https://github.com/go-acme/lego), que intenta automatizar la mayoría (cuando no todos) de los pasos requeridos. Cabe mencionar que los certificados Let's Encrypt solo son válidos durante tres meses por los que es necesario renovar el certificado antes de que caduque.
 
