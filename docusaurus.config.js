@@ -45,6 +45,10 @@ module.exports = {
               to: 'docs/',
             },
             {
+              label: 'Docker',
+              to: 'docs/docker1/',
+            },
+            {
               label: 'BITNAMI',
               to: 'docs/btn1/',
             },
