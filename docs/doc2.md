@@ -3,11 +3,14 @@ id: doc2
 title: Certificados HTTPS para Wordpress Bitnami
 sidebar_label: Nuevo SSL
 ---
-
-# Certificados HTTPS para Wordpress Bitnami
 En este tutorial aprenderás a cómo instalar, crear, y configurar correctamente un **Certificado SSL Gratuito**, para nuestra instalación de **WordPress en Amazon Web Services (AWS) versión Bitnami**.
 
-> Contar con un certificado SSL es primordial para mejorar la seguridad de nuestro sitio web y cumplir con las directrices de Google obteniendo una mejor indexación de nuestra página web (Posicionamiento Orgánico SEO).
+:::important
+
+Contar con un certificado SSL es primordial para mejorar la seguridad de nuestro sitio web y cumplir con las directrices de Google obteniendo una mejor indexación de nuestra página web (Posicionamiento Orgánico SEO).
+
+:::
+
 
 ## Instrucciones
 Guía paso a paso:
