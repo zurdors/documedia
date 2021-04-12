@@ -1,5 +1,5 @@
 ---
-id: doc1
+id: doc2
 title: Certificados HTTPS para Wordpress Bitnami
 sidebar_label: Nuevo SSL
 ---
