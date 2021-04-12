@@ -47,7 +47,7 @@ Agregar en la última línea del archivo la siguiente línea:
 ```
 Include "/opt/bitnami/apps/dimediawp/conf/httpd-vhosts.conf"
 ```
- ![](src/img/img-doc2-01.png)
+ ![](img/img-doc2-01.png)
 
 #### Modificar el archivo `bitnami-apps-prefix.conf`
 Modificar el archivo `bitnami-apps-prefix.conf`. Dicho archivo se encuentra en `/opt/bitnami/apache2/conf/bitnami/bitnami-apps-prefix.conf`. Busca las siguientes líneas `Include "/opt/bitnami/apps/dimediawp/conf/httpd-prefix.conf"` y coméntelas:
